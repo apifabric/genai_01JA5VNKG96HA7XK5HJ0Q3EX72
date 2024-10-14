@@ -1,0 +1,94 @@
+// Copy this text, paste to https://dbdiagram.io/d
+// Or, https://databasediagram.com/app
+
+Table Customer {
+    id INTEGER [primary key]
+    name VARCHAR 
+    email VARCHAR 
+    }
+
+Table Employee {
+    id INTEGER [primary key]
+    name VARCHAR 
+    position VARCHAR 
+    }
+
+Table InventoryItem {
+    id INTEGER [primary key]
+    name VARCHAR 
+    quantity INTEGER 
+    supplier_id INTEGER 
+    }
+
+Table Supplier {
+    id INTEGER [primary key]
+    name VARCHAR 
+    }
+
+Table MenuCategory {
+    id INTEGER [primary key]
+    name VARCHAR 
+    }
+
+Table MenuItem {
+    id INTEGER [primary key]
+    name VARCHAR 
+    price FLOAT 
+    category_id INTEGER 
+    }
+
+Table Order {
+    id INTEGER [primary key]
+    customer_id INTEGER 
+    employee_id INTEGER 
+    table_id INTEGER 
+    order_time DATETIME 
+    }
+
+Table Table {
+    id INTEGER [primary key]
+    name VARCHAR 
+    }
+
+Table OrderItem {
+    id INTEGER [primary key]
+    order_id INTEGER 
+    menu_item_id INTEGER 
+    quantity INTEGER 
+    }
+
+Table Payment {
+    id INTEGER [primary key]
+    order_id INTEGER 
+    amount FLOAT 
+    payment_time DATETIME 
+    }
+
+Table PurchaseOrder {
+    id INTEGER [primary key]
+    supplier_id INTEGER 
+    order_date DATETIME 
+    total_amount FLOAT 
+    }
+
+Table Reservation {
+    id INTEGER [primary key]
+    customer_id INTEGER 
+    table_id INTEGER 
+    reservation_time DATETIME 
+    }
+
+
+
+// Relationships
+    Ref: InventoryItem.(supplier_id) < Supplier.(id)
+    Ref: MenuItem.(category_id) < MenuCategory.(id)
+    Ref: Order.(customer_id) < Customer.(id)
+    Ref: Order.(employee_id) < Employee.(id)
+    Ref: Order.(table_id) < Table.(id)
+    Ref: OrderItem.(menu_item_id) < MenuItem.(id)
+    Ref: OrderItem.(order_id) < Order.(id)
+    Ref: Payment.(order_id) < Order.(id)
+    Ref: PurchaseOrder.(supplier_id) < Supplier.(id)
+    Ref: Reservation.(customer_id) < Customer.(id)
+    Ref: Reservation.(table_id) < Table.(id)
